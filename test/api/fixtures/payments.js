@@ -1500,6 +1500,41 @@ nock('https://devapi.currencycloud.com:443', {"encodedQueryParams": true})
         "fee_amount": "10.00",
         "fee_currency": "EUR" });
 
+nock('https://devapi.currencycloud.com:443', {"encodedQueryParams": true})
+  .get('/v2/payments/payment_fees')
+  .reply(200, {
+    "payment_fees": [
+      {
+        "id": "e7e1b6e5-c596-4ad1-b8d4-a7035185143a",
+        "name": "Fee Table CAD  5 - 10 - 15",
+        "currency": "CAD",
+        "regular_amount": "5.00",
+        "priority_shared_amount": "10.00",
+        "priority_ours_amount": "15.00",
+        "owner_account_id": ""
+      }, 
+      {
+        "id": "029e1771-8de7-4ab0-9c19-c14b325c0c9e",
+        "name": "Fee Table USD  2 - 4 - 12",
+        "currency": "USD",
+        "regular_amount": "2.00",
+        "priority_shared_amount": "4.00",
+        "priority_ours_amount": "12.00",
+        "owner_account_id": ""
+      }
+    ],
+    "pagination": {
+      "total_entries": 2,
+      "total_pages": 1,
+      "current_page": 1,
+      "per_page": 25,
+      "previous_page": -1,
+      "next_page": -1,
+      "order": "created_at",
+      "order_asc_desc": "asc"
+    }
+});
+
 nock('https://devapi.currencycloud.com:443')
   .post('/v2/authenticate/close_session')
   .reply(200, {});
