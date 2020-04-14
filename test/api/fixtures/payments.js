@@ -1535,6 +1535,12 @@ nock('https://devapi.currencycloud.com:443', {"encodedQueryParams": true})
     }
 });
 
+nock("https://devapi.currencycloud.com:443", {
+  encodedQueryParams: true
+}).post("/v2/payments/unassign_payment_fee").reply(200, {
+  account_id: "245a1ebd-d8a6-416d-bcc1-9de381d22f90"
+});
+
 nock('https://devapi.currencycloud.com:443')
   .post('/v2/authenticate/close_session')
   .reply(200, {});

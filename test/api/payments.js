@@ -456,4 +456,22 @@ describe('payments', function () {
             });
         });
     });
+
+    describe("unassignPaymentFee", function () {
+        it("successfully unassigns a payment fee", function () {
+            currencyCloud.payments.unassignPaymentFee({
+                accountId: "accountId123"
+            }).then(function (res) {
+                expect(res).to.not.be.empty;
+
+                expect(res).to.have.property("accountId").that.equals("245a1ebd-d8a6-416d-bcc1-9de381d22f90");
+            });
+        });
+
+        it("throws an error if the accountId is not provided", function() {
+            expect(function () {
+                currencyCloud.payments.unassignPaymentFee();
+            }).to.throw("accountId is required");
+        });
+    });
 });
