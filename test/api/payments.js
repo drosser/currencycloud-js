@@ -456,4 +456,35 @@ describe('payments', function () {
             });
         });
     });
+
+    describe("assignPaymentFee", function () {
+        it("successfully assigns a payment fee to an account", function () {
+            currencyCloud.payments.assignPaymentFee({
+                paymentFeeId: "hello",
+                accountId: "accountId123"
+            })
+            .then(function (res) {
+                expect(res).to.not.be.empty;
+
+                expect(res).to.have.property("id").that.equals("7c17b546-0435-45f0-9c17-3a4e0f2d3e84");
+                expect(res).to.have.property("accountId").that.equals("245a1ebd-d8a6-416d-bcc1-9de381d22f90");
+            });
+        });
+
+        it ("throws an error when the paymentFeeId is missing", function () {
+            expect(function () {
+                currencyCloud.payments.assignPaymentFee({
+                    accountId: "accountId123"
+                });
+            }).to.throw("paymentFeeId is required");
+        });
+
+        it ("throws an error when the accountId is missing", function () {
+            expect(function () {
+                currencyCloud.payments.assignPaymentFee({
+                    paymentFeeId: "hello"
+                });
+            }).to.throw("accountId is required");
+        });
+    });
 });
