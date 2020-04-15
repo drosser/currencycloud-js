@@ -1548,6 +1548,21 @@ nock("https://devapi.currencycloud.com:443", {
   account_id: "245a1ebd-d8a6-416d-bcc1-9de381d22f90"
 });
 
+nock("https://devapi.currencycloud.com:443", {
+  encodedQueryParams: true
+})
+.get("/v2/payments/assigned_payment_fee")
+.query({account_id: "4e8ca601-80c0-0133-26ca-0022194273c7"})
+.reply(200, {
+  id: "2bd34951-becc-4b52-b7d1-3f954609d173",
+  name: "Fee table name",
+  currency: "EUR",
+  regular_amount: "4.00",
+  priority_shared_amount: "5.00",
+  priority_ours_amount: "6.00",
+  owner_account_id: "4e8ca601-80c0-0133-26ca-0022194273c7"
+});
+
 nock('https://devapi.currencycloud.com:443')
   .post('/v2/authenticate/close_session')
   .reply(200, {});

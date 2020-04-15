@@ -505,4 +505,22 @@ describe('payments', function () {
             }).to.throw("accountId is required");
         });
     });
+
+    describe("assignedPaymentFee", function () {
+        it("successfully gets the assigned payment fee", function () {
+            currencyCloud.payments.assignedPaymentFee({
+                accountId: "4e8ca601-80c0-0133-26ca-0022194273c7"
+            }).then(function (res) {
+                expect(res).to.not.be.empty;
+
+                expect(res).to.have.property("id").that.equals("2bd34951-becc-4b52-b7d1-3f954609d173");
+                expect(res).to.have.property("name").that.equals("Fee table name");
+                expect(res).to.have.property("currency").that.equals("EUR");
+                expect(res).to.have.property("regularAmount").that.equals("4.00");
+                expect(res).to.have.property("prioritySharedAmount").that.equals("5.00");
+                expect(res).to.have.property("priorityOursAmount").that.equals("6.00");
+                expect(res).to.have.property("ownerAccountId").that.equals("4e8ca601-80c0-0133-26ca-0022194273c7");
+            });
+        });
+    });
 });
